@@ -48,7 +48,17 @@ public class MessageService {
         return messageDAO.getMessageById(posted_by);
     }
 
-    public void updateMessage(int message_id){
-        messageDAO.updateMessage(null);
+    public Message updateMessage(int message_id, Message message){
+        if(messageDAO.getMessageById(message_id)==null){
+            return null;
+        }
+        return messageDAO.getMessageById(message_id);
     }
 }
+
+// public Flight updateFlight(int flight_id, Flight flight){
+//     if(flightDAO.getFlightById(flight_id)==null){
+//         return null;
+//     }
+//     return flightDAO.getFlightById(flight_id );
+// }
