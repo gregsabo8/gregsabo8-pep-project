@@ -30,35 +30,46 @@ public class MessageService {
     }
 
     public Message createMessage(Message message){
-        if(messageDAO.getMessageById(message.getMessage_id())!=null){
-            return null;
+         if(message.getMessage_text()==""){
+             return null;
         }
         return messageDAO.createMessage(message);
     }
 
-    public void deleteMessage(int message_id){
-        messageDAO.deleteMessage(message_id);
+    public boolean deleteMessage(int message_id){
+        return messageDAO.deleteMessage(message_id);
     }
 
     public List<Message> retrieveMessagesFromUser(int posted_by){
         return messageDAO.retrieveMessageForUser(posted_by);
     }
 
-    public Message getMessageById(int posted_by){
-        return messageDAO.getMessageById(posted_by);
+    public Message getMessageById(int message_id){
+        if(messageDAO.getMessageById(message_id) != null){
+            return messageDAO.getMessageById(message_id);
+        }else{
+            return null;
+        }
+
+        
+        
     }
 
     public Message updateMessage(int message_id, Message message){
-        if(messageDAO.getMessageById(message_id)==null){
+        Message updatedMessage = messageDAO.getMessageById(message_id);
+
+        if(updatedMessage==null){
             return null;
+        }else{
+            updatedMessage.setMessage_text(message.getMessage_text());
+            return updatedMessage;
         }
-        return messageDAO.getMessageById(message_id);
+        // if(messageDAO.getMessageById(message_id)==null){
+        //     return null;
+        // }
+        // //update
+        // return messageDAO.getMessageById(message_id);
     }
 }
 
-// public Flight updateFlight(int flight_id, Flight flight){
-//     if(flightDAO.getFlightById(flight_id)==null){
-//         return null;
-//     }
-//     return flightDAO.getFlightById(flight_id );
-// }
+

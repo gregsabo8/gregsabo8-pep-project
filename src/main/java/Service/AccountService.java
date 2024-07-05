@@ -17,10 +17,25 @@ public class AccountService {
     }
 
     public List<Account> getAllAccount(){
+        
         return accountDAO.getAllAccounts();
     }
 
     public Account insertAccount(Account account){
+        if(account.getUsername()==""||account.getPassword().length()<5){
+            return null;
+        }
         return accountDAO.insertAccount(account);
+    }
+
+    public Account login(String username, String password){
+
+        if(accountDAO!=null){
+            return accountDAO.login(username,password);
+
+        }
+        else{
+            return null;
+        }
     }
 }
